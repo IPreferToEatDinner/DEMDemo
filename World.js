@@ -1,4 +1,4 @@
-import { CesiumTerrainProvider, Ion, Terrain, Viewer } from 'cesium';
+import { Cartesian3, CesiumTerrainProvider, Ion, Terrain, Viewer } from 'cesium';
 import enrollHeightGetter from './src/handler/enrollHeightGetter';
 
 export default class World {
@@ -17,9 +17,11 @@ export default class World {
 			infoBox: false,
 		});
 
-		const terrainProvider = CesiumTerrainProvider.fromUrl('http://localhost:9003/terrain/UHo6htLG');
+		const terrainProvider = CesiumTerrainProvider.fromIonAssetId(2323715);
 
-		this.#viewer.terrainProvider = terrainProvider;
+		this.#viewer.scene.setTerrain(new Terrain(terrainProvider));
+
+		this.#viewer.camera.flyTo({ destination: Cartesian3.fromDegrees(111.48, 27.13, 40000) });
 	}
 
 	registerHandlers() {
