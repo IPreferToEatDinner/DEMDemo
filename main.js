@@ -1,4 +1,4 @@
-import World from './World';
+import World from './src/World';
 
 async function main() {
 	const world = new World();
@@ -6,6 +6,8 @@ async function main() {
 	world.init();
 
 	world.registerHandlers();
+
+	// world.mountVideo();
 }
 
 main();

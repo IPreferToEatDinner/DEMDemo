@@ -1,5 +1,5 @@
 import { Cartesian3, CesiumTerrainProvider, Ion, Terrain, Viewer } from 'cesium';
-import enrollHeightGetter from './src/handler/enrollHeightGetter';
+import enrollHeightGetter from './handler/enrollHeightGetter';
 
 export default class World {
 	/**
@@ -26,5 +26,19 @@ export default class World {
 
 	registerHandlers() {
 		enrollHeightGetter(this.#viewer);
+	}
+
+	mountVideo() {
+		// 获取视频元素
+		const videoElement = document.getElementById('myVideo');
+		// 创建实体对象
+		const rectangle = this.#viewer.entities.add({
+			rectangle: {
+				coordinates: Cesium.Rectangle.fromDegrees(-80.0, 39.0, -79.0, 40.0),
+				material: videoElement,
+			},
+		});
+		// 锁定实体对象（这句可有可无）
+		this.#viewer.camera.flyTo({ destination: rectangle.position });
 	}
 }
